@@ -1,51 +1,36 @@
 #include "sort.h"
 
 /**
- * do_swap - change  positions in array
- * @array: array list
- * @pos1: position to change
- * @pos2: position to change
- *
- * Return: array pointer
- */
-int *do_swap(int *array, int pos1, int pos2)
-{
-	array[pos1] = array[pos1] ^ array[pos2];
-	array[pos2] = array[pos1] ^ array[pos2];
-	array[pos1] = array[pos1] ^ array[pos2];
-
-	return (array);
-}
-
-
-
-/**
- * bubble_sort - order an array in ascenden form
- * @array: array
+ * bubble_sort - sorts an array of integers in ascending order
+ * using the Bubble sort algorithm
+ * @array: Array to sort
  * @size: size of the array
  *
- * Return: none
+ * Return: Void
  */
 void bubble_sort(int *array, size_t size)
 {
-	size_t j;
-	unsigned long int c = 0;
-	int flag = 1;
+	size_t i, j, size2 = size;
+	int tmp, flag = 0;
 
-	if (size < 2)
+	if (array == NULL || size < 2)
 		return;
-
-	while (size > 0 && flag)
+	for (i = 0; i < size; i++)
 	{
-		flag = 0;
-		for (j = 1; j < (size - c); j++)
+		for (j = 1; j < size2; j++)
 		{
 			if (array[j - 1] > array[j])
 			{
-				flag++;
-				do_swap(array, (j - 1), j);
+				flag = 1;
+				tmp = array[j];
+				array[j] = array[j - 1];
+				array[j - 1] = tmp;
 				print_array(array, size);
 			}
-		} c++;
+		}
+		if (flag == 0)
+			break;
+		flag = 0;
+		size2--;
 	}
 }
