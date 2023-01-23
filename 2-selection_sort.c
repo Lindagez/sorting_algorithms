@@ -1,54 +1,31 @@
 #include "sort.h"
-
-int *do_swap(int *array, int current, int tmp);
-
 /**
- * selection_sort - sorting algorithm
- * @array: array list
- * @size: size of the array
- *
- * Return: None
- */
+  * selection_sort - selection sort algorithm
+  * @array: array to sort
+  * @size: size of array
+  */
 void selection_sort(int *array, size_t size)
 {
-	unsigned int j, c = 0;
-	int current, flag, tmp;
+	size_t i, i2;
+	int min, tmp, idx;
 
-	if (size < 2)
-		return;
-
-	while (c < size)
+	for (i = 0; i < size; i++)
 	{
-		current = c, flag = 0, tmp = c;
-
-		for (j = c + 1; j < size; j++)
+		min = array[i];
+		for (i2 = i + 1; i2 < size; i2++)
 		{
-			if (array[j] < array[current])
-				current = j, flag = 1;
-		} c++;
-		if (flag)
+			if (min > array[i2])
+			{
+				min = array[i2];
+				idx = i2;
+			}
+		}
+		if (min != array[i])
 		{
-			do_swap(array, current, tmp);
+			tmp = array[i];
+			array[i] = min;
+			array[idx] = tmp;
 			print_array(array, size);
 		}
 	}
-}
-
-/**
- * do_swap - change positions value
- * @array: array list
- * @current: current pivot
- * @tmp: temporal pivot
- *
- * Return: None
- */
-int *do_swap(int *array, int current, int tmp)
-{
-	int key;
-
-	key  = array[current];
-	array[current] = array[tmp];
-	array[tmp] = key;
-
-	return (array);
 }
